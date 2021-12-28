@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<style>
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
+
+</head>
+<body>
+     <a href="/logout/">Logout</a>
+     <a href="/createdetails/">Add</a>
+     <table>
+         <tr>
+             <th>Sr.No.</th>
+             <th>Student</th>
+             <th>View</th>
+             <th>Edit</th>
+             <th>Delete</th>
+             
+         </tr>
+         {% for i in student %}
+         <tr>
+            <td>{{i.id}}.</td>
+            <td>{{i.name}}</td>
+            <td><button onclick="myFunctionedit({{i.id}}, {{forloop.counter}})" class="editbtn">View</button></td>
+            <td><button onclick="myFunctionedit({{i.id}}, {{forloop.counter}})" class="editbtn">Edit</button></td>
+            <td><button onclick="myFunctionedit({{i.id}}, {{forloop.counter}})" class="editbtn">Delete</button></td>
+         </tr>
+         {% endfor %}
+     </table>
+
+     <div class="container my-3" id = "edit">
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name='name' value = 'None' placeholder="Enter Your Name">
+              </div>
+    
+              <div class="form-group">
+                <label for="roll">Roll</label>
+                <input type="text" class="form-control" id="roll" name='roll' value = 'None' placeholder="Enter Your Roll">
+              </div>
+    
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" name='city' value = 'None' placeholder="Enter Your City">
+              </div>
+              
+              <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+
+     </div>
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(edit).hide();
+function myfunction(e,f){
+    console.log("User wants to edit!");
+    $.ajax({
+     type: 'GET',
+     url: "{% url 'edit_data' %}",
+     data: {"id" : c},
+     success: function (response) {
+        
+         if(response["valid"])
+         {   
+
+             console.log("Edited") 
+           
+}
+
+</script>
+</html>
